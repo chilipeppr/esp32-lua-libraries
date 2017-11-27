@@ -1,6 +1,7 @@
 -- ChiliPeppr Websocket client library for Lua ESP32
 -- Copyright ChiliPeppr 2017
 -- By John Lauer
+-- Visit http://chilipeppr.com/esp32 for more details
 -- This library lets you talk over a websocket using pure Lua
 --
 -- To use this library:
