@@ -10,6 +10,6 @@ The websocket client only handles the text payload, which works well for most. I
 
 The client does ping/pong to keep connections alive. It works great on Wemos, TTGO, Lolin, Sparkfun, and Adafruit ESP32 devices.
 
-# Analog Lua Joystick Library
+# ESP32 Lua Joystick Library
 A library for reading on two ADC ports on ESP32 the voltage from an analog joystick like those you can buy on aliexpress.com for $2. Has code 
 to debounce the ADC values when the joystick is at the center. Has several callback routines for XY position updates. See more information at http://chilipeppr.com/esp32 
