@@ -1,5 +1,6 @@
 # esp32-lua-libraries
 Lua libraries for ESP32 that I find handy. These are all available inside the sample code at http://chilipeppr.com/esp32 which is a web IDE for ESP32 devices.
+Some folks refer to Lua on ESP32 as NodeMCU for ESP32.
 
 # ESP32 Lua Websocket Library
 A websocket client for ESP32 in pure Lua. This library is used by many other libraries in the sample code inside the ChiliPeppr ESP32 workspace. 
