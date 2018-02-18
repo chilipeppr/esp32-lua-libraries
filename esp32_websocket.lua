@@ -280,7 +280,7 @@ function m.decodeFrame(frame)
 
 end
 
--- currently only supports sending short frames less than 126 chars
+-- supports sending frames less than 65536 chars
 function m.send(data)
   
   print("Websocket doing send. data:", data)
@@ -292,24 +292,27 @@ function m.send(data)
     return
   end 
   
-  local binstr, payloadLen 
-  
-  -- we need to create the frame headers
-  if string.len(data) > 126 then 
-    print("Websocket lib only supports max len 126 currently")
-    return
-  end
-  
-  -- print("Len: ", string.len(data))
+  local binstr
+  local payloadLen = string.len(data)
   
   -- 1st byte
   -- binstr = string.char(0x1) -- opcode set to 0x1 for txt
   binstr = string.char(bit.set(0x1, 7)) -- set FIN to 1 meaning we will not multi-part this msg
+  
+  if payloadLen < 126 then
 
-  -- 2nd byte mask and payload length
-  payloadLen = string.len(data) 
-  payloadLen = bit.set(payloadLen, 7) -- set mask to on for 8th msb
-  binstr = binstr .. string.char(payloadLen)
+	-- 2nd byte mask and payload length
+    payloadLen = bit.set(payloadLen, 7) -- set mask to on for 8th msb
+    binstr = binstr .. string.char(payloadLen)
+
+  elseif payloadLen < 65536 then
+
+	-- arrange payloadLen in two bytes
+    binstr = binstr .. string.char(254, bit.rshift(payloadLen, 8), bit.band(payloadLen, 255))
+
+  end
+  
+  -- print("Len: ", string.len(data))
   
   -- 3rd, 4th, 5th, and 6th byte is masking key
   -- just use mask of 0 to cheat so no need to xor
